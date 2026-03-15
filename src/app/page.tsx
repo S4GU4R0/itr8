@@ -536,7 +536,7 @@ Add prominent CTA button --iterates--> A/B test button colors`}
             </a>
             <a
               className="text-xs text-muted-foreground hover:text-primary"
-              href="https://github.com/0dataapp/small-web-app-ring#add-your-projects-to-the-ring"
+              href="https://ring.0data.app/#random"
               target="_blank"
               rel="noreferrer"
             >
