@@ -526,6 +526,22 @@ Add prominent CTA button --iterates--> A/B test button colors`}
               Clear All
             </Button>
             <span>Works offline • Data stored locally</span>
+            <a
+              className="text-xs text-muted-foreground hover:text-primary"
+              href="/llm.txt"
+              target="_blank"
+              rel="noreferrer"
+            >
+              llm.txt
+            </a>
+            <a
+              className="text-xs text-muted-foreground hover:text-primary"
+              href="https://github.com/0dataapp/small-web-app-ring#add-your-projects-to-the-ring"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Part of the Doorless App Ring
+            </a>
           </div>
         </div>
       </footer>
