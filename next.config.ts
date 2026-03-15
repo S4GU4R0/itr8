@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
   
   // For GitHub Pages deployment to a subdirectory (e.g., username.github.io/repo-name)
   // Uncomment and set the basePath to your repo name:
-  // basePath: "/your-repo-name",
+  basePath: "/itr8",
   
   typescript: {
     ignoreBuildErrors: true,
