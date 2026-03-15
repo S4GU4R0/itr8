@@ -10,5 +10,8 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+# LLM instructions for content generation
+# See /llm.txt for guidance on generating ITR8-compatible content
+
 User-agent: *
 Allow: /

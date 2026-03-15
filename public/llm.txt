@@ -1,0 +1,137 @@
+# ITR8: Problem-Solution Connection Tracker
+
+## What is ITR8?
+
+ITR8 is a Progressive Web App for tracking connections between problems, solutions, and their iterations. It helps users visualize and manage complex problem-solving networks using a text-based input syntax similar to Mermaid diagrams.
+
+Because it allows for text input or GUI interactions, some people may ask you to generate content for the purpose of using this app. 
+
+## How to Generate Content
+
+### Item Types
+- **P:** Problems - Issues or challenges that need to be addressed
+- **S:** Solutions - Approaches or methods to solve problems
+- **I:** Iterations - Refinements or versions of solutions
+
+### Connection Types
+- `--solves-->` : Solution addresses a problem
+- `--causes-->` : One problem leads to another
+- `--iterates-->` : Iteration improves upon a solution
+- `--breaks-down-->` : Problem can be decomposed into sub-problems
+- `-->` : General relationship (default)
+
+### Syntax Examples
+
+```
+# Define items
+P: Slow website performance
+P: High server costs
+S: Implement caching
+S: Use CDN
+I: Redis caching v2
+I: CloudFront CDN setup
+
+# Create connections
+Slow website performance --solves--> Implement caching
+Implement caching --iterates--> Redis caching v2
+High server costs --solves--> Use CDN
+Use CDN --iterates--> CloudFront CDN setup
+Slow website performance --causes--> High server costs
+```
+
+## Content Generation Guidelines
+
+### Best Practices
+1. **Start with Problems**: Begin by identifying core problems or challenges
+2. **Create Solutions**: For each problem, brainstorm multiple solution approaches
+3. **Add Iterations**: Show how solutions evolve through iterations
+4. **Establish Connections**: Link related items with appropriate connection types
+5. **Break Down Complex Problems**: Use --breaks-down--> for hierarchical decomposition
+
+### Example Scenarios
+
+#### Software Development
+```
+P: User authentication issues
+P: Password reset complexity
+P: Security vulnerabilities
+
+S: Implement OAuth2
+S: Use JWT tokens
+S: Add two-factor authentication
+
+I: OAuth2 with Google
+I: JWT with refresh tokens
+I: SMS-based 2FA
+
+User authentication issues --solves--> Implement OAuth2
+Implement OAuth2 --iterates--> OAuth2 with Google
+User authentication issues --solves--> Use JWT tokens
+Use JWT tokens --iterates--> JWT with refresh tokens
+Password reset complexity --solves--> Add two-factor authentication
+Add two-factor authentication --iterates--> SMS-based 2FA
+Security vulnerabilities --causes--> User authentication issues
+```
+
+#### Product Development
+```
+P: Low user engagement
+P: Complex onboarding
+P: Feature discoverability
+
+S: Simplify user interface
+S: Create tutorial system
+S: Add feature highlights
+
+I: One-click setup
+I: Interactive walkthrough
+I: Contextual tooltips
+
+Low user engagement --solves--> Simplify user interface
+Simplify user interface --iterates--> One-click setup
+Low user engagement --solves--> Create tutorial system
+Create tutorial system --iterates--> Interactive walkthrough
+Complex onboarding --solves--> Add feature highlights
+Add feature highlights --iterates--> Contextual tooltips
+Low user engagement --breaks-down--> Complex onboarding
+Low user engagement --breaks-down--> Feature discoverability
+```
+
+#### Business Strategy
+```
+P: Declining market share
+P: Outdated product features
+P: Ineffective marketing
+
+S: Product modernization
+S: Digital marketing campaign
+S: Customer feedback integration
+
+I: AI-powered features
+I: Social media automation
+I: Real-time feedback system
+
+Declining market share --solves--> Product modernization
+Product modernization --iterates--> AI-powered features
+Declining market share --solves--> Digital marketing campaign
+Digital marketing campaign --iterates--> Social media automation
+Outdated product features --solves--> Customer feedback integration
+Customer feedback integration --iterates--> Real-time feedback system
+Declining market share --breaks-down--> Outdated product features
+Declining market share --breaks-down--> Ineffective marketing
+```
+
+### Quality Criteria
+- **Relevance**: Ensure connections are logical and meaningful
+- **Completeness**: Include descriptions where helpful using quotes
+- **Hierarchy**: Use breaks-down for problem decomposition
+- **Evolution**: Show solution improvement through iterations
+- **Balance**: Mix different connection types for rich networks
+
+### Advanced Features
+- **Descriptions**: Add quotes after titles for detailed descriptions
+- **Multiple Solutions**: Problems can have multiple solution approaches
+- **Causal Chains**: Use --causes--> to show problem interdependencies
+- **Iteration Trees**: Solutions can have multiple iterations showing evolution
+
+This format allows LLMs to generate structured, interconnected content that can be directly imported into ITR8 for visualization and management.
