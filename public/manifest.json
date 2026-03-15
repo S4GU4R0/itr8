@@ -1,0 +1,40 @@
+{
+  "name": "Connection Tracker",
+  "short_name": "ConnTrack",
+  "description": "Track connections between problems, solutions, and iterations",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#18181b",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Add Problem",
+      "short_name": "Problem",
+      "description": "Add a new problem",
+      "url": "/?action=add&type=problem"
+    },
+    {
+      "name": "Add Solution",
+      "short_name": "Solution",
+      "description": "Add a new solution",
+      "url": "/?action=add&type=solution"
+    }
+  ]
+}
