@@ -22,10 +22,10 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Connection Tracker - Problem-Solution Network",
+  title: "ITR8 - Problem-Solution Network",
   description: "Track connections between problems, solutions, and their iterations. Works offline.",
   keywords: ["problem solving", "connections", "iterations", "offline", "pwa"],
-  authors: [{ name: "Connection Tracker" }],
+  authors: [{ name: "ITR8" }],
   manifest: "/manifest.json",
   icons: {
     icon: [

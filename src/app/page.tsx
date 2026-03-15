@@ -273,7 +273,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <h1 className="text-xl font-bold">🔗 Connection Tracker</h1>
+              <h1 className="text-xl font-bold">🔗 ITR8</h1>
               <Tabs value={viewMode} onValueChange={(v) => handleViewModeChange(v as 'text' | 'list' | 'graph')}>
                 <TabsList className="h-8">
                   <TabsTrigger value="text" className="px-3 text-xs">

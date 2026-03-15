@@ -192,7 +192,7 @@ export function parseInput(text: string): ParseResult {
 // Generate text from items and connections
 export function generateText(items: Item[], connections: Connection[]): string {
   const lines: string[] = [];
-  lines.push('# Connection Tracker Data');
+  lines.push('# ITR8 Data');
   lines.push('# Format: P: Problem, S: Solution, I: Iteration');
   lines.push('# Connections: Title --solves--> Target');
   lines.push('');
