@@ -528,7 +528,7 @@ Add prominent CTA button --iterates--> A/B test button colors`}
             <span>Works offline • Data stored locally</span>
             <a
               className="text-xs text-muted-foreground hover:text-primary"
-              href="/llm.txt"
+              href="/itr8/llm.txt"
               target="_blank"
               rel="noreferrer"
             >
