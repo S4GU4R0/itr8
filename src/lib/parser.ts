@@ -3,7 +3,7 @@
 // - P: Problem title  or  problem: Title  or  (P) Title
 // - S: Solution title  or  solution: Title  or  (S) Title
 // - I: Iteration title  or  iteration: Title  or  (I) Title
-// - Title --solves--> Target  or  Title --> solves --> Target
+// - Title --solves--> Target  or  Title --causes--> Target  or  Title --iterates--> Target  or  Title --breaks-down--> Target
 // - Title --> Target  (defaults to 'related')
 
 import type { Item, Connection, ItemType, ConnectionType } from './types';
@@ -94,19 +94,15 @@ function parseConnectionLine(line: string): ParsedConnection | null {
   
   // Match patterns:
   // Title --solves--> Target
-  // Title --> solves --> Target
-  // Title --> Target (related)
-  // Title -> Target (related)
-  // Title -solves-> Target
+  // Title --causes--> Target
+  // Title --iterates--> Target
   // Title --breaks-down--> Target (for sub-problems)
+  // Title --> Target (defaults to 'related')
   
+  // Note: Uses ES2018 lookbehind (?<!-) and lookahead (?!--)
   const connectionPatterns = [
-    /^(.+?)\s*--\s*(solves|causes|iterates|breaks-down|breaks down|related)\s*-->\s*(.+)$/i,
-    /^(.+?)\s*-->\s*(solves|causes|iterates|breaks-down|breaks down|related)\s*-->\s*(.+)$/i,
-    /^(.+?)\s*->\s*(solves|causes|iterates|breaks-down|breaks down|related)\s*->\s*(.+)$/i,
-    /^(.+?)\s*-\s*(solves|causes|iterates|breaks-down|breaks down|related)\s*->\s*(.+)$/i,
-    /^(.+?)\s*-->\s*(.+)$/,
-    /^(.+?)\s*->\s*(.+)$/,
+    /^(.+?)\s*(?<!-)--(?!--)\s*(solves|causes|iterates|breaks-down|breaks down|related)\s*-->\s*(.+)$/i,
+    /^(?!.*(?:solves|causes|iterates|breaks-down|breaks down)\s*-->)(.+?)-->\s*(.+)$/i,
   ];
   
   for (const pattern of connectionPatterns) {
