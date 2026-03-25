@@ -177,10 +177,14 @@ Title --> Target              # Related items (default)
 
 ## 📤 Deploy to GitHub Pages
 
-### 🎯 Option 1: Automatic Deployment (Recommended)
+### 🎯 Option 1: GitHub Actions Deployment (Recommended)
+
+*Best for: Projects that need automatic builds and deployments on every push*
 
 #### GitHub Actions Deployment
-*Easiest & Automatic*
+
+#### GitHub Actions Deployment
+*Automated deployment with GitHub Actions*
 
 1. **Push to GitHub**
    ```bash
