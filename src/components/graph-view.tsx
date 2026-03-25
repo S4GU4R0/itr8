@@ -22,13 +22,18 @@ const V_GAP = 12; // Vertical gap for branches
 export function GraphView({ items, connections, selectedItemId, onSelectItem }: GraphViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
-  const [offset, setOffset] = useState({ x: 20, y: 20 });
+  const [offset, setOffset] = useState(() => ({
+    x: PADDING,
+    y: PADDING,
+  }));
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   
+  const PADDING = 40;
+
   // Build layout with proper subtree sizing
-  const { nodes, edges } = useMemo(() => {
-    if (items.length === 0) return { nodes: [], edges: [] };
+  const { nodes, edges, bounds } = useMemo(() => {
+    if (items.length === 0) return { nodes: [], edges: [], bounds: { minX: 0, minY: 0, maxX: 0, maxY: 0, width: 0, height: 0 } };
     
     const itemMap = new Map(items.map(i => [i.id, i]));
     
@@ -202,21 +207,43 @@ export function GraphView({ items, connections, selectedItemId, onSelectItem }: 
     const posMap = new Map(nodePositions.map(n => [n.item.id, n]));
     const edges: { x1: number; y1: number; x2: number; y2: number; conn: Connection }[] = [];
     
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+
+    if (nodePositions.length > 0) {
+      minX = Math.min(...nodePositions.map(n => n.x));
+      minY = Math.min(...nodePositions.map(n => n.y));
+      maxX = Math.max(...nodePositions.map(n => n.x + NODE_WIDTH));
+      maxY = Math.max(...nodePositions.map(n => n.y + NODE_HEIGHT));
+    }
     for (const conn of connections) {
       const from = posMap.get(conn.fromId);
       const to = posMap.get(conn.toId);
       if (!from || !to) continue;
       
-      edges.push({
+      // Create edge first
+      const edge = {
         x1: from.x + NODE_WIDTH,
         y1: from.y + NODE_HEIGHT / 2,
         x2: to.x,
         y2: to.y + NODE_HEIGHT / 2,
         conn,
-      });
+      };
+      
+      edges.push(edge);
+      
+      // Update bounds with edge coordinates
+      minX = Math.min(minX, edge.x1, edge.x2);
+      minY = Math.min(minY, edge.y1, edge.y2);
+      maxX = Math.max(maxX, edge.x1, edge.x2);
+      maxY = Math.max(maxY, edge.y1, edge.y2);
     }
+
+    const width = (maxX - minX) + PADDING * 2;
+    const height = (maxY - minY) + PADDING * 2;
+
+    const bounds = { minX, minY, maxX, maxY, width, height };
     
-    return { nodes: nodePositions, edges };
+    return { nodes: nodePositions, edges, bounds };
   }, [items, connections]);
   
   const handleWheel = (e: React.WheelEvent) => {
@@ -229,10 +256,13 @@ export function GraphView({ items, connections, selectedItemId, onSelectItem }: 
     setIsDragging(true);
     setDragStart({ x: e.clientX - offset.x, y: e.clientY - offset.y });
   };
-  
+
   const handleMouseMove = (e: React.MouseEvent) => {
     if (isDragging) {
-      setOffset({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y });
+      // Calculate new offset based on current mouse position and drag start
+      const newX = e.clientX - dragStart.x;
+      const newY = e.clientY - dragStart.y;
+      setOffset({ x: newX, y: newY });
     }
   };
   
@@ -240,7 +270,7 @@ export function GraphView({ items, connections, selectedItemId, onSelectItem }: 
   
   const resetView = () => {
     setScale(1);
-    setOffset({ x: 20, y: 20 });
+    setOffset({ x: PADDING, y: PADDING });
   };
   
   if (items.length === 0) {
@@ -277,11 +307,11 @@ export function GraphView({ items, connections, selectedItemId, onSelectItem }: 
         onMouseLeave={handleMouseUp}
       >
         <svg
-          width="100%"
-          height="100%"
+          width={bounds.width}
+          height={bounds.height}
           style={{
             transform: `translate(${offset.x}px, ${offset.y}px) scale(${scale})`,
-            transformOrigin: "top left",
+            transformOrigin: "0 0",
           }}
         >
           {/* Edges - straight lines */}
