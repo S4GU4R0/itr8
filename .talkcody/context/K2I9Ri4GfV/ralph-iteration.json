@@ -1,0 +1,10 @@
+{
+  "taskId": "K2I9Ri4GfV",
+  "startedAt": 1774446621834,
+  "updatedAt": 1774462753436,
+  "iteration": 2,
+  "stopReason": "max-wall-time",
+  "stopMessage": "Reached max wall time",
+  "completionPromiseMatched": false,
+  "errors": []
+}
