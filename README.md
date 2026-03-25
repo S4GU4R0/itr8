@@ -1,4 +1,3 @@
----
 <!-- GitHub Metadata for better SEO and search results -->
 <div style="display: none;">
   <meta name="description" content="ITR8 is a Progressive Web App for tracking connections between problems, solutions, and their iterations using a simple text-based input system and visual graph visualization.">
