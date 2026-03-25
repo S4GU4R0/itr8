@@ -22,14 +22,13 @@ const V_GAP = 12; // Vertical gap for branches
 export function GraphView({ items, connections, selectedItemId, onSelectItem }: GraphViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
+  const PADDING = 40;
   const [offset, setOffset] = useState(() => ({
     x: PADDING,
     y: PADDING,
   }));
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  
-  const PADDING = 40;
 
   // Build layout with proper subtree sizing
   const { nodes, edges, bounds } = useMemo(() => {
@@ -259,12 +258,28 @@ export function GraphView({ items, connections, selectedItemId, onSelectItem }: 
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (isDragging) {
-      // Calculate new offset based on current mouse position and drag start
       const newX = e.clientX - dragStart.x;
       const newY = e.clientY - dragStart.y;
-      setOffset({ x: newX, y: newY });
+
+      const container = containerRef.current;
+      if (container) {
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+        const boundsWidth = bounds.width * scale;
+        const boundsHeight = bounds.height * scale;
+
+        // Calculate max offsets to keep graph within container
+        const maxOffsetX = containerWidth - boundsWidth;
+        const maxOffsetY = containerHeight - boundsHeight;
+
+        // Allow panning within bounds
+        const clampedX = Math.max(maxOffsetX, Math.min(newX, 0));
+        const clampedY = Math.max(maxOffsetY, Math.min(newY, 0));
+
+        setOffset({ x: clampedX, y: clampedY });
+      }
     }
-  };
+  },
   
   const handleMouseUp = () => setIsDragging(false);
   
@@ -282,7 +297,7 @@ export function GraphView({ items, connections, selectedItemId, onSelectItem }: 
   }
   
   return (
-    <div className="relative h-full w-full overflow-hidden bg-muted/30 rounded-lg">
+      <div className="relative h-full w-full overflow-visible bg-muted/30 rounded-lg">
       {/* Controls */}
       <div className="absolute top-2 right-2 z-10 flex gap-1">
         <Button variant="outline" size="sm" onClick={() => setScale((s) => Math.min(2, s * 1.2))}>
