@@ -179,58 +179,37 @@ Title --> Target              # Related items (default)
 
 ### 🎯 Option 1: Automatic Deployment (Recommended)
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 16px;">
-  <div style="border: 2px solid #e5e7eb; border-radius: 8px; padding: 20px; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-      <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🎯</div>
-      <div>
-        <h3 style="margin: 0; color: #1f2937;">GitHub Actions</h3>
-        <span style="font-size: 0.85rem; color: #6b7280;">Easiest & Automatic</span>
-      </div>
-    </div>
+#### GitHub Actions Deployment
+*Easiest & Automatic*
 
-    <ol style="padding-left: 20px; color: #4b5563; line-height: 1.8;">
-      <li><strong style="color: #667eea;">Push to GitHub</strong><br><code style="background: #f3f4f6; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem;">git init && git add . && git commit -m "Initial commit" && git branch -M main && git remote add origin ... && git push -u origin main</code></li>
-      <li style="margin-top: 12px;"><strong style="color: #667eea;">Enable GitHub Pages</strong><br>Settings → Pages → Source → Select "GitHub Actions"</li>
-      <li style="margin-top: 12px;"><strong style="color: #667eea;">Access your app</strong><br><code style="background: #f3f4f6; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem;">https://USERNAME.github.io/REPO/</code></li>
-    </ol>
-  </div>
+1. **Push to GitHub**
+   ```bash
+   git init && git add . && git commit -m "Initial commit" && git branch -M main && git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git && git push -u origin main
+   ```
 
-  <div style="border: 2px solid #e5e7eb; border-radius: 8px; padding: 20px; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-      <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🌐</div>
-      <div>
-        <h3 style="margin: 0; color: #1f2937;">Root Domain</h3>
-        <span style="font-size: 0.85rem; color: #6b7280;">username.github.io</span>
-      </div>
-    </div>
+2. **Enable GitHub Pages**
+   - Go to your repo on GitHub
+   - Settings → Pages → Source → Select "GitHub Actions"
+   - The workflow will automatically deploy
 
-    <ol style="padding-left: 20px; color: #4b5563; line-height: 1.8;">
-      <li>Create repo named <strong style="color: #3b82f6;">YOUR_USERNAME.github.io</strong></li>
-      <li style="margin-top: 12px;">Follow Option 1 steps above</li>
-      <li style="margin-top: 12px;"><strong style="color: #3b82f6;">Your app at:</strong><br><code style="background: #f3f4f6; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem;">https://USERNAME.github.io/</code></li>
-    </ol>
-  </div>
-</div>
+3. **Access your app**
+   - Your app will be at: `https://YOUR_USERNAME.github.io/YOUR_REPO/`
 
-### 📦 Option 3: Manual Export
+#### Root Domain Deployment
+*username.github.io*
 
-<div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #6c757d; border-radius: 8px; padding: 20px; margin-top: 20px;">
-  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-    <span style="font-size: 1.5rem;">📦</span>
-    <h3 style="margin: 0; color: #495057;">Manual Export</h3>
-  </div>
+1. Create a repo named `YOUR_USERNAME.github.io`
+2. Follow Option 1 steps above
+3. Your app will be at: `https://YOUR_USERNAME.github.io/`
 
-  <div style="background: #1e1e1e; border-radius: 6px; padding: 16px; margin-top: 16px; font-family: 'Courier New', monospace;">
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <span style="color: #61dafb;">➜</span>
-      <span style="color: #f8f8f2;">📦</span>
-      <span style="color: #f8f8f2;">bun run export</span>
-    </div>
-  </div>
+### 📦 Option 2: Manual Export
 
-  <p style="margin-top: 16px; color: #6b7280;">The <strong style="color: #495057;">out</strong> folder contains your static site. Upload the contents to any static hosting.</p>
-</div>
+#### Build Static Files
+```bash
+bun run export
+```
+
+The `out` folder contains your static site. Upload the contents to any static hosting.
 
 ---
 
@@ -238,34 +217,25 @@ Title --> Target              # Related items (default)
 
 ### 🌐 Custom Domain
 
-<div style="display: flex; align-items: flex-start; gap: 12px; margin-top: 16px;">
-  <div style="background: #fff3cd; border: 1px solid #ffc107; border-radius: 6px; padding: 8px; font-size: 1.5rem;">🔧</div>
-  <div style="flex: 1;">
-    <h4 style="margin: 0 0 8px 0; color: #856404;">Add CNAME File</h4>
-    <ol style="padding-left: 20px; color: #555; margin-bottom: 12px;">
-      <li>Create a <code style="background: #f8f9fa; padding: 2px 6px; border-radius: 3px;">CNAME</code> file in <code style="background: #f8f9fa; padding: 2px 6px; border-radius: 3px;">public/</code> folder</li>
-      <li>Enter your domain (e.g., <code style="background: #f8f9fa; padding: 2px 6px; border-radius: 3px;">example.com</code>)</li>
-    </ol>
-    <h4 style="margin: 0 0 8px 0; color: #856404;">Configure DNS</h4>
-    <p style="margin: 0; color: #555;">Configure DNS with your domain provider</p>
-  </div>
-</div>
+🔧 **Add CNAME File**
+1. Create a `CNAME` file in `public/` folder
+2. Enter your domain (e.g., `example.com`)
+
+🔧 **Configure DNS**
+Configure DNS with your domain provider.
 
 ### 📂 Subdirectory Deployment
 
-<div style="display: flex; align-items: flex-start; gap: 12px; margin-top: 16px;">
-  <div style="background: #d1ecf1; border: 1px solid #0dcaf0; border-radius: 6px; padding: 8px; font-size: 1.5rem;">📂</div>
-  <div style="flex: 1;">
-    <h4 style="margin: 0 0 8px 0; color: #0c5460;">Edit next.config.ts</h4>
-    <div style="background: #1e1e1e; border-radius: 6px; padding: 16px; margin-top: 12px; font-family: 'Courier New', monospace; font-size: 0.9rem;">
-      <span style="color: #569cd6;">const</span> nextConfig: NextConfig = {
-        <span style="color: #9cdcfe;">basePath</span>: <span style="color: #ce9178;">"/your-repo-name"</span>, <span style="color: #6a9955;">// Uncomment and set your repo name</span>
-      };
-    </div>
-  </div>
-</div>
+📂 **Edit next.config.ts**
+
+```typescript
+const nextConfig: NextConfig = {
+  basePath: "/your-repo-name", // Uncomment and set your repo name
+};
+```
 
 ---
+
 
 ## 💡 Usage Examples
 
