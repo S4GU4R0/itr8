@@ -279,7 +279,7 @@ export function GraphView({ items, connections, selectedItemId, onSelectItem }: 
         setOffset({ x: clampedX, y: clampedY });
       }
     }
-  },
+  }
   
   const handleMouseUp = () => setIsDragging(false);
   
